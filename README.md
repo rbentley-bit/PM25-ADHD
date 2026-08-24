@@ -95,7 +95,8 @@ PM_data.csv — County-level annual PM₂.₅ estimates derived from the Atmosph
 
 Births_2007-2024.csv — County-level natality data obtained from the CDC WONDER Natality database, using the Infant Birth Weight (12-category) table for 2007–2024. Low birth weight is defined as birth weight below 2,500 g. CDC WONDER suppresses small county-level counts in accordance with NCHS confidentiality requirements. Users of these data remain subject to the CDC WONDER data-use restrictions.
 
-Diabetes_2004-2021.csv
+Diabetes_2004-2021.csv — Annual county-level age-adjusted estimates of diagnosed diabetes prevalence among adults aged 20 years or older, obtained from the CDC United States Diabetes Surveillance System (USDSS). County estimates are based on BRFSS and U.S. Census population data and were generated using small-area estimation methods. This file preserves the USDSS estimates used in the present analysis; CDC has subsequently revised its county-level estimation methodology and historical estimates.
+
 ADHD_2016–2018.csv
 full_covariates_paper.csv
 ```
