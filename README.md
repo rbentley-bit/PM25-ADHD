@@ -91,12 +91,16 @@ The analysis combines publicly available or previously published county-level da
 The principal input files used by the scripts are:
 
 ```text
-PM_data.csv
-Births_2007-2024.csv
+PM_data.csv — County-level annual PM₂.₅ estimates derived from the Atmospheric Composition Analysis Group (ACAG) satellite-based gridded PM₂.₅ data. Annual 0.01° × 0.01° gridded estimates were aggregated to U.S. counties using population-weighted averages. The underlying ACAG SatPM₂.₅ data are distributed under CC BY 4.0. See the manuscript Methods for details and citations.
+
+Births_2007-2024.csv — County-level natality data obtained from the CDC WONDER Natality database, using the Infant Birth Weight (12-category) table for 2007–2024. Low birth weight is defined as birth weight below 2,500 g. CDC WONDER suppresses small county-level counts in accordance with NCHS confidentiality requirements. Users of these data remain subject to the CDC WONDER data-use restrictions.
+
 Diabetes_2004-2021.csv
 ADHD_2016–2018.csv
 full_covariates_paper.csv
 ```
+
+
 
 Script 01 additionally uses annual and 5-year ACS source files organized into the directories specified in that script.
 
