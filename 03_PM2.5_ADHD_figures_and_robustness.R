@@ -23,7 +23,6 @@
 #      - ACS 5-year + state fixed-effects model
 #      - alternative PM2.5 exposure windows
 #      - outlier sensitivity
-#      - economic-connectedness sensitivity
 #      - Moran's I
 #      - spatial-error model
 #   4. Manuscript figures
@@ -65,8 +64,8 @@ lbw_pm25 <- readRDS("LBW_PM25_county_year.rds") %>% mutate(FIPS = as.integer(FIP
 diabetes_pm25 <- readRDS("Diabetes_PM25_county_year.rds") %>% mutate(FIPS = as.integer(FIPS))
 adhd_pm25 <- readRDS("ADHD_PM25_county.rds") %>% mutate(FIPS = as.integer(FIPS))
 
-# Original county covariates are retained only for the economic-connectedness
-# sensitivity analysis and reproduction of the residual maps.
+# Original county covariates are retained only to reproduce
+# the covariate-adjusted residual maps in Figure 4.
 county_covariates_original <- read_csv("full_covariates_paper.csv", show_col_types = FALSE) %>%
   mutate(FIPS = as.integer(FIPS), FIPS_chr = sprintf("%05d", FIPS))
 
@@ -452,23 +451,6 @@ model_adhd_trimmed <- lm(
 
 coef(summary(model_adhd_trimmed))["pm25_2005_2015", ]
 
-# ============================================================
-# 16. ADHD sensitivity: economic connectedness
-# ============================================================
-
-if ("econ_connect" %in% names(adhd_common)) {
-  adhd_econ_sample <- adhd_common %>% drop_na(econ_connect)
-
-  model_adhd_econ <- lm(
-    ADHD ~ pm25_2005_2015 + econ_connect + median_household_income_10K +
-      median_age + pct_bachelors + factor(State),
-    data = adhd_econ_sample
-  )
-
-  coef(summary(model_adhd_econ))["pm25_2005_2015", ]
-} else {
-  message("econ_connect not present; economic-connectedness sensitivity skipped.")
-}
 
 # ============================================================
 # PART IV. ADHD SPATIAL ROBUSTNESS
