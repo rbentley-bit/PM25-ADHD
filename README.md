@@ -99,7 +99,7 @@ Diabetes_2004-2021.csv — Annual county-level age-adjusted estimates of diagnos
 
 ADHD_2016–2018.csv — County-level childhood ADHD prevalence estimates from Zgodic et al. (2023), County-Level Prevalence Estimates of ADHD in Children in the United States, Annals of Epidemiology 79:56–64. The estimates were generated using small-area estimation applied to the 2016–2018 National Survey of Children’s Health for children aged 5–17 years. The data were obtained from the article’s supplementary file 1-s2.0-S1047279723000066-mmc2.docx; the prevalence estimate and 95% confidence interval are reported for each county. The CSV used here contains the county-level estimates extracted from that supplementary table.
 
-full_covariates_paper.csv
+full_covariates_paper.csv — County-level covariate file used to reproduce the residual maps for PM₂.₅, low birth weight, and diabetes in Figure 4. The residual models use household income, mean age, bachelor’s degree share, and state fixed effects. The primary revised statistical analyses instead use the contemporaneous annual ACS and 2018 ACS 5-year covariates constructed in Script 01.
 ```
 
 
