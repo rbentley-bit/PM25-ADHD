@@ -97,7 +97,8 @@ Births_2007-2024.csv — County-level natality data obtained from the CDC WONDER
 
 Diabetes_2004-2021.csv — Annual county-level age-adjusted estimates of diagnosed diabetes prevalence among adults aged 20 years or older, obtained from the CDC United States Diabetes Surveillance System (USDSS). County estimates are based on BRFSS and U.S. Census population data and were generated using small-area estimation methods. This file preserves the USDSS estimates used in the present analysis; CDC has subsequently revised its county-level estimation methodology and historical estimates.
 
-ADHD_2016–2018.csv
+ADHD_2016–2018.csv — County-level childhood ADHD prevalence estimates from Zgodic et al. (2023), County-Level Prevalence Estimates of ADHD in Children in the United States, Annals of Epidemiology 79:56–64. The estimates were generated using small-area estimation applied to the 2016–2018 National Survey of Children’s Health for children aged 5–17 years. The data were obtained from the article’s supplementary file 1-s2.0-S1047279723000066-mmc2.docx; the prevalence estimate and 95% confidence interval are reported for each county. The CSV used here contains the county-level estimates extracted from that supplementary table.
+
 full_covariates_paper.csv
 ```
 
