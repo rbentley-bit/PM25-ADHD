@@ -2,14 +2,13 @@
 
 Code accompanying the manuscript:
 
-**Bentley, R. A. and Ozeryansky, L.**  
-*Long-term air pollution exposure and childhood ADHD prevalence*
+**Bentley, R. A. and L. Ozeryansky (2026)**  *Long-term air pollution exposure and childhood ADHD prevalence* in *Scientific Reports*
 
 This repository contains the R code used to construct the analysis datasets, perform the statistical analyses and robustness checks, and generate the figures reported in the manuscript.
 
 ## Repository structure
 
-The analysis is organized into three scripts that should be run in order.
+The analysis is organized into three scripts. Script 01 documents construction of the ACS covariates from the original Census source files; Scripts 02 and 03 reproduce the analyses using the processed ACS covariates included in this repository.
 
 ### `01_build_ACS_covariates.R`
 
@@ -39,85 +38,58 @@ Performs the statistical analyses and robustness checks reported in the revised 
 - lagged fixed-effects analyses
 - childhood ADHD models using ACS 5-year covariates and state fixed effects
 - alternative PM2.5 exposure windows
-- outlier and economic-connectedness sensitivity analyses
+- outlier sensitivity analyses
 - Moran's I tests for residual spatial autocorrelation
 - spatial-error modeling using county-contiguity weights
 - construction of the manuscript figures and numerical results for the tables
 
 ## Running the analysis
 
-The scripts should be run from the project directory in the following order:
+To reproduce the analyses using the data and processed ACS covariates included in this repository, run:
 
 ```r
-source("01_build_ACS_covariates.R")
 source("02_build_health_PM25_analysis_data.R")
 source("03_PM2.5_ADHD_figures_and_robustness.R")
 ```
 
-Scripts 01 and 02 generate intermediate RDS files that are subsequently read by Script 03.
+Script 02 generates the intermediate health and PM2.5 analysis datasets used by Script 03.
 
-## R packages
+Script `01_build_ACS_covariates.R` documents the upstream construction of the ACS covariate panels from the original U.S. Census Bureau source files. The processed outputs of Script 01 are included in the repository, so Script 01 does not need to be rerun to reproduce the manuscript analyses.
 
-The analyses use the following R packages:
+## Data files
 
-```r
-dplyr
-tidyr
-purrr
-readr
-ggplot2
-fixest
-tigris
-sf
-spdep
-spatialreg
-viridis
-patchwork
-grid
-```
+The repository includes the input datasets required to reproduce the analyses.
 
-Additional packages required for importing or processing the ACS source files are specified in Script 01.
+- `PM_data.csv` — County-level annual PM2.5 estimates derived from the Atmospheric Composition Analysis Group (ACAG) satellite-based gridded PM2.5 data. Annual 0.01° × 0.01° gridded estimates were aggregated to U.S. counties using population-weighted averages. The underlying ACAG SatPM2.5 data are distributed under CC BY 4.0. See the manuscript Methods for details and citations.
 
-## Data
+- `Births_2007-2024.csv` — County-level natality data obtained from the CDC WONDER Natality database, using the Infant Birth Weight (12-category) table for 2007–2024. Low birth weight is defined as birth weight below 2,500 g. CDC WONDER suppresses small county-level counts in accordance with NCHS confidentiality requirements. Users of these data remain subject to the CDC WONDER data-use restrictions.
 
-The analysis combines publicly available or previously published county-level data from several sources, including:
+- `Diabetes_2004-2021.csv` — Annual county-level age-adjusted estimates of diagnosed diabetes prevalence among adults aged 20 years or older, obtained from the CDC United States Diabetes Surveillance System (USDSS). These estimates are based on Behavioral Risk Factor Surveillance System survey responses and U.S. Census population data using small-area estimation methods.
 
-- U.S. Census Bureau American Community Survey (ACS)
-- county-level PM2.5 exposure estimates
-- U.S. county-level birth data
-- county-level diabetes prevalence estimates
-- county-level childhood ADHD prevalence estimates
+- `ADHD_2016–2018.csv` — County-level childhood ADHD prevalence estimates from Zgodic et al. (2023), derived from the 2016–2018 National Survey of Children's Health using small-area estimation. Data were obtained from the article's supplementary file `1-s2.0-S1047279723000066-mmc2.docx`.
 
-The principal input files used by the scripts are:
+- `full_covariates_paper.csv` — County-level covariates retained to reproduce the covariate-adjusted PM2.5, low-birth-weight, and diabetes residual maps in Figure 4. The revised longitudinal robustness analyses instead use contemporaneous annual ACS covariates, while the primary ADHD analysis uses 2018 ACS 5-year estimates.
 
-```text
-PM_data.csv — County-level annual PM₂.₅ estimates derived from the Atmospheric Composition Analysis Group (ACAG) satellite-based gridded PM₂.₅ data. Annual 0.01° × 0.01° gridded estimates were aggregated to U.S. counties using population-weighted averages. The underlying ACAG SatPM₂.₅ data are distributed under CC BY 4.0. See the manuscript Methods for details and citations.
+## ACS covariates
 
-Births_2007-2024.csv — County-level natality data obtained from the CDC WONDER Natality database, using the Infant Birth Weight (12-category) table for 2007–2024. Low birth weight is defined as birth weight below 2,500 g. CDC WONDER suppresses small county-level counts in accordance with NCHS confidentiality requirements. Users of these data remain subject to the CDC WONDER data-use restrictions.
+Socioeconomic and demographic covariates were obtained from the U.S. Census Bureau American Community Survey (ACS).
 
-Diabetes_2004-2021.csv — Annual county-level age-adjusted estimates of diagnosed diabetes prevalence among adults aged 20 years or older, obtained from the CDC United States Diabetes Surveillance System (USDSS). County estimates are based on BRFSS and U.S. Census population data and were generated using small-area estimation methods. This file preserves the USDSS estimates used in the present analysis; CDC has subsequently revised its county-level estimation methodology and historical estimates.
+`01_build_ACS_covariates.R` contains the code used to construct the ACS covariate panels from the original Census ACS downloads. Because the raw ACS downloads consist of numerous publicly available source files, they are not duplicated in this repository.
 
-ADHD_2016–2018.csv — County-level childhood ADHD prevalence estimates from Zgodic et al. (2023), County-Level Prevalence Estimates of ADHD in Children in the United States, Annals of Epidemiology 79:56–64. The estimates were generated using small-area estimation applied to the 2016–2018 National Survey of Children’s Health for children aged 5–17 years. The data were obtained from the article’s supplementary file 1-s2.0-S1047279723000066-mmc2.docx; the prevalence estimate and 95% confidence interval are reported for each county. The CSV used here contains the county-level estimates extracted from that supplementary table.
+For reproducibility of the downstream analyses, the processed outputs generated by Script 01 are included directly:
 
-full_covariates_paper.csv — County-level covariate file retained only to reproduce the covariate-adjusted PM₂.₅, low-birth-weight, and diabetes residual maps in Figure 4. The revised longitudinal robustness analyses use contemporaneous annual ACS measures of household income, educational attainment, median age, poverty, unemployment, and health-insurance coverage constructed by Script 01; the primary ADHD analysis uses 2018 ACS 5-year estimates.
-```
+- `ACS_county_covariates_annual.rds`
+- `ACS_county_covariates_annual.csv`
+- `ACS_county_covariates_5year.rds`
+- `ACS_county_covariates_5year.csv`
 
+The annual panel contains contemporaneous county-level measures used in the low-birth-weight and diabetes robustness analyses, including median household income, median age, educational attainment, poverty, unemployment, and health-insurance coverage.
 
+The 5-year panel provides the ACS estimates used for the cross-sectional ADHD analysis. The primary ADHD model uses the 2018 ACS 5-year estimates, representing 2014–2018.
 
-Script 01 additionally uses annual and 5-year ACS source files organized into the directories specified in that script.
+The `.rds` files are read directly by the downstream R scripts. The equivalent `.csv` files are provided for transparency and convenient inspection.
 
-Detailed provenance and access information for the input datasets will be provided in the manuscript and repository documentation. Data derived from external sources remain subject to the terms and conditions of their original providers.
-
-## Reproducibility
-
-The code is organized so that the analysis datasets can be reconstructed from the input data and the statistical analyses can then be reproduced by running Scripts 01–03 sequentially.
-
-Script 03 creates the statistical results underlying the manuscript tables and generates the manuscript figures in R. Figure files themselves are not automatically exported by the script.
 
 ## Code availability
 
 The archived version of this repository associated with the published manuscript will be deposited in Zenodo and assigned a DOI.
-
-## License
-
-License information will be added prior to archival release.
