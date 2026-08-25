@@ -93,3 +93,9 @@ The `.rds` files are read directly by the downstream R scripts. The equivalent `
 ## Code availability
 
 The archived version of this repository associated with the published manuscript will be deposited in Zenodo and assigned a DOI.
+
+## License
+
+The R code in this repository is released under the MIT License. See `LICENSE` for details.
+
+The datasets included in this repository retain their original terms of use and licensing, as described above under **Data files**.
